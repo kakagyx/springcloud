@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: eureka-provider
+
+---
+spring:
+  profiles: p1
+server:
+  port: 7071
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@     # 服务实例Id
+    prefer-ip-address: true  #访问路径可以显示IP地址
+  client:
+    service-url:
+      defaultZone: http://eureka-server1:8761/eureka,http://eureka-server2:8762/eureka,http://eureka-server3:8763/eureka
+    fetch-registry: true
+    register-with-eureka: true
+---
+spring:
+  profiles: p2
+server:
+  port: 7072
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@     # 服务实例Id
+    prefer-ip-address: true  #访问路径可以显示IP地址
+  client:
+    service-url:
+      defaultZone: http://eureka-server1:8761/eureka,http://eureka-server2:8762/eureka,http://eureka-server3:8763/eureka
+    fetch-registry: true
+    register-with-eureka: true
